@@ -6,7 +6,7 @@
 /*   By: vseppane <vseppane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 14:47:01 by vseppane          #+#    #+#             */
-/*   Updated: 2024/07/15 18:31:27 by vseppane         ###   ########.fr       */
+/*   Updated: 2024/07/21 13:16:55 by vseppane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	errors1(int error);
 static void	errors2(int error);
+static void	errors3(int error);
 
 void	error_messages(int error)
 {
@@ -27,8 +28,8 @@ void	error_messages(int error)
 		errors1(error);
 	else if (error <= -11 && error >= -20)
 		errors2(error);
-	else
-		ft_putstr_fd("Undefined error. Cool!\n", 1);
+	else if (error <= -21)
+		errors3(error);
 }
 
 static void	errors1(int error)
@@ -68,7 +69,7 @@ static void	errors2(int error)
 	else if (error == -15)
 		ft_putstr_fd("Map name is too short to be valid\n", 1);
 	else if (error == -16)
-		ft_putstr_fd("Error opening the file\n", 1);
+		ft_putstr_fd("Error opening a file or file does not exist\n", 1);
 	else if (error == -17)
 		ft_putstr_fd("Invalid map piece found\n", 1);
 	else if (error == -18)
@@ -76,5 +77,11 @@ static void	errors2(int error)
 	else if (error == -19)
 		ft_putstr_fd("Error loading texture\n", 1);
 	else if (error == -20)
-		ft_putstr_fd("Map will not fit on a 4K display\n", 1);
+		ft_putstr_fd("Map is too big\n", 1);
+}
+
+static void	errors3(int error)
+{
+	if (error == -21)
+		ft_putstr_fd("Texture was not found\n", 1);
 }

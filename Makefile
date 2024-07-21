@@ -31,6 +31,7 @@ SRC :=		src/main.c \
 			src/game_inits.c \
 			src/render_pieces.c \
 			src/render_utils.c \
+			src/textures_check.c \
 			src/textures_load.c \
 			src/textures_load_wall.c \
 			src/textures_load_floor.c \
@@ -38,6 +39,7 @@ SRC :=		src/main.c \
 			src/textures_load_player.c \
 			src/textures_load_enemy.c \
 			src/textures_load_collectible.c \
+			src/textures_free.c \
 			src/console.c \
 			src/console_messages.c
 
@@ -48,7 +50,7 @@ SRC :=		src/main.c \
 
 mapsvalid :=	valid3.ber \ valid4.ber \ valid2.ber \ valid1.ber
 
-mapsinvalid := ber	\ invalid-lastlinetoolong.ber \ invalid-nostartingposition.ber \ invalid-badpiece.ber \ invalid-name.be \ invalid-notsurroundedbywalls1.ber \ invalid-empty.ber \ invalid-nocollectibles.ber \ invalid-notsurroundedbywalls2.ber \ invalid-emptylineend.ber \invalid-noexit.ber \ invalid-notsurroundedbywalls3.ber \ invalid-emptylinemid.ber \ invalid-nonrectangle.ber \ invalid-toosmall.ber \ invalid-emptylinestart.ber \ invalid-nopathtocollectible.ber \ invalid-twoexits.ber \ invalid-hole.ber \ invalid-nopathtoexit.ber \ invalid-twostartingpositions.ber \ invalid-toowide.ber \ invalid-tootall.ber 
+mapsinvalid := ber \ invalid-lastlinetoolong.ber \ invalid-nostartingposition.ber \ invalid-badpiece.ber \ invalid-name.be \ invalid-notsurroundedbywalls1.ber \ invalid-empty.ber \ invalid-nocollectibles.ber \ invalid-notsurroundedbywalls2.ber \ invalid-emptylineend.ber \invalid-noexit.ber \ invalid-toowide.ber \ invalid-tootall.ber \ invalid-notsurroundedbywalls3.ber \ invalid-emptylinemid.ber \ invalid-nonrectangle.ber \ invalid-toosmall.ber \ invalid-emptylinestart.ber \ invalid-nopathtocollectible.ber \ invalid-twoexits.ber \ invalid-hole.ber \ invalid-nopathtoexit.ber \ invalid-twostartingpositions.ber
 
 #   _                     _      
 #  | |_ __ _ _ _ __ _ ___| |_ ___
@@ -97,17 +99,6 @@ playlist:	all
 faillist:	all
 			@for map in $(mapsinvalid); do \
 				./$(NAME) $$map; \
-			done
-
-#      _     _                _                     _      
-#   __| |___| |__ _  _ __ _  | |_ __ _ _ _ __ _ ___| |_ ___
-#  / _` / -_) '_ \ || / _` | |  _/ _` | '_/ _` / -_)  _(_-<
-#  \__,_\___|_.__/\_,_\__, |  \__\__,_|_| \__, \___|\__/__/
-#                     |___/               |___/            
-
-vallist:	all
-			@for map in $(mapsvalid); do \
-				valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $$map; \
 			done
 
 .PHONY:		all clean fclean re playlist faillist vallist

@@ -6,7 +6,7 @@
 /*   By: vseppane <vseppane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 17:21:13 by vseppane          #+#    #+#             */
-/*   Updated: 2024/07/17 12:59:00 by vseppane         ###   ########.fr       */
+/*   Updated: 2024/07/17 18:37:41 by vseppane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	mlx_init_ptr(t_data *game)
 	if (!game->mlx_ptr)
 	{
 		free(game->mlx_ptr);
-		game_quit(game, -18, 0);
+		game_quit_error(game, -18, 0);
 	}
 }
 
@@ -35,7 +35,7 @@ static void	mlx_init_window(t_data *game)
 	if (!game->mlx_ptr)
 	{
 		free (game->mlx_ptr);
-		game_quit(game, -18, 0);
+		game_quit_error(game, -18, 0);
 	}
 }
 

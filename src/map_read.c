@@ -6,7 +6,7 @@
 /*   By: vseppane <vseppane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 17:07:32 by vseppane          #+#    #+#             */
-/*   Updated: 2024/07/17 12:25:07 by vseppane         ###   ########.fr       */
+/*   Updated: 2024/07/17 17:56:33 by vseppane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	piece_add(char c, t_data *game, int x, char *line)
 		|| c == 'X')
 		return ;
 	free (line);
-	game_quit (game, -17, 1);
+	game_quit_error(game, -17, 1);
 }
 
 /*
@@ -79,7 +79,7 @@ static int	line_check(t_data *game, char *line)
 		if (width != game->x)
 		{
 			free(line);
-			game_quit(game, -1, 1);
+			game_quit_error(game, -1, 1);
 		}
 	}
 	if (game->x == -1)
@@ -89,7 +89,7 @@ static int	line_check(t_data *game, char *line)
 	if ((game->y == 1 && walls != 1) || (game->y > 1 && walls == 0))
 	{
 		free (line);
-		game_quit (game, -2, 1);
+		game_quit_error(game, -2, 1);
 	}
 	return (walls);
 }
@@ -99,7 +99,7 @@ int	lastline_check(t_data *game, char *line, int lastline)
 	if (line == NULL && lastline != 1)
 	{
 		free(line);
-		game_quit(game, -2, 1);
+		game_quit_error(game, -2, 1);
 	}
 	if (line == NULL && lastline == 1)
 	{

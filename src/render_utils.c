@@ -6,7 +6,7 @@
 /*   By: vseppane <vseppane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:54:36 by vseppane          #+#    #+#             */
-/*   Updated: 2024/07/16 18:41:20 by vseppane         ###   ########.fr       */
+/*   Updated: 2024/07/17 18:07:19 by vseppane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	render_gameover(t_data *game, int color)
 	while (i < game->x * TEX_SIZE)
 		mlx_pixel_put(game->mlx_ptr, game->win_ptr, ++i, y, color);
 	if (y >= game->y * TEX_SIZE)
-		game_quit(game, 0, 0);
+		game_quit(game);
 }
 
 /*

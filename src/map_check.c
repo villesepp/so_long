@@ -6,7 +6,7 @@
 /*   By: vseppane <vseppane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:14:43 by vseppane          #+#    #+#             */
-/*   Updated: 2024/07/16 18:36:43 by vseppane         ###   ########.fr       */
+/*   Updated: 2024/07/17 17:56:54 by vseppane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	map_check(t_data *game)
 {
 	map_flood_fill(game, game->pl_x, game->pl_y);
 	if (map_flood_fill_check(game))
-		game_quit(game, -3, 2);
+		game_quit_error(game, -3, 2);
 	map_free(game);
 	map_create(game);
 }

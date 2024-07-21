@@ -6,7 +6,7 @@
 /*   By: vseppane <vseppane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:46:44 by vseppane          #+#    #+#             */
-/*   Updated: 2024/07/16 18:46:44 by vseppane         ###   ########.fr       */
+/*   Updated: 2024/07/17 18:02:35 by vseppane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	move_check(t_data *game, int x, int y)
 int	key_inputs(int code, t_data *game)
 {
 	if (code == 65307 || code == 113)
-		game_quit(game, 0, 0);
+		game_quit(game);
 	if ((code == 65362 || code == 119) && (move_check(game, -1, 0)))
 	{
 		game->pl_move_dir = 1;

@@ -6,7 +6,7 @@
 /*   By: vseppane <vseppane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 17:25:33 by vseppane          #+#    #+#             */
-/*   Updated: 2024/07/16 18:18:35 by vseppane         ###   ########.fr       */
+/*   Updated: 2024/07/21 12:43:46 by vseppane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 static void	map_dimension_check(t_data *game)
 {
 	if (game->x > 30 || game->y > 16)
-		game_quit(game, -20, 1);
+		game_quit_error(game, -20, 1);
 }
 
 /*
@@ -27,15 +27,15 @@ static void	map_dimension_check(t_data *game)
 static void	piece_count_check(t_data *game)
 {
 	if (game->collectible < 1)
-		game_quit(game, -6, 1);
+		game_quit_error(game, -6, 1);
 	if (game->exit == 0)
-		game_quit(game, -5, 1);
+		game_quit_error(game, -5, 1);
 	if (game->exit > 1)
-		game_quit(game, -12, 1);
+		game_quit_error(game, -12, 1);
 	if (game->pl == 0)
-		game_quit(game, -8, 1);
+		game_quit_error(game, -8, 1);
 	if (game->pl > 1)
-		game_quit(game, -13, 1);
+		game_quit_error(game, -13, 1);
 }
 
 /*
@@ -51,14 +51,14 @@ static void	map_file_name_check(char *map, t_data *game)
 
 	len = ft_strlen(map);
 	if (len < 5)
-		game_quit(game, -15, 0);
+		game_quit_error(game, -15, 0);
 	if (map[len - 1] == 'r' && map[len - 2] == 'e'
 		&& map[len - 3] == 'b' && map[len - 4] == '.')
 	{
 		game->map_file = ft_strjoin("maps/", map);
 	}
 	else
-		game_quit(game, -14, 0);
+		game_quit_error(game, -14, 0);
 }
 
 /*
@@ -71,12 +71,12 @@ static void	map_file_read_open_check(t_data *game)
 	fd = open(game->map_file, O_RDONLY);
 	if (fd == -1)
 	{
-		game_quit(game, -16, 0);
+		game_quit_error(game, -16, 0);
 	}
 	if (read (fd, NULL, 0) < 0)
 	{
 		close(fd);
-		game_quit(game, -10, 0);
+		game_quit_error(game, -10, 0);
 	}
 	close(fd);
 }
@@ -87,9 +87,10 @@ static void	map_file_read_open_check(t_data *game)
 void	error_checks(char *map, t_data *game, int argc)
 {
 	if (argc != 2)
-		game_quit (game, -11, 0);
+		game_quit_error(game, -11, 0);
 	map_file_name_check(map, game);
 	map_file_read_open_check(game);
+	textures_check(game);
 	init_values(game);
 	game->fd = open(game->map_file, O_RDONLY);
 	piece_and_size_check(game);

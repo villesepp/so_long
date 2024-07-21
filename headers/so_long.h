@@ -6,7 +6,7 @@
 /*   By: vseppane <vseppane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:40:14 by vseppane          #+#    #+#             */
-/*   Updated: 2024/07/17 12:50:55 by vseppane         ###   ########.fr       */
+/*   Updated: 2024/07/21 14:02:20 by vseppane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,20 +62,29 @@ typedef struct t_datas
 	void	*tex_enemy3;
 }	t_data;
 
+/* keyboard input */
+int		key_inputs(int code, t_data *game);
+
+/* errors  */
 void	error_messages(int error);
 void	error_checks(char *map, t_data *game, int argc);
 
+/* initializing */
 void	inits(t_data *game);
 void	init_values(t_data *game);
 
-int		game_quit(t_data *game, int error, int error_stage);
-int		key_inputs(int code, t_data *game);
-void	map_update(t_data *game, int x, int y);
+/* quitting the game */
+int		game_quit(t_data *game);
+int		game_quit_error(t_data *game, int error, int error_stage);
 
+/* map */
+void	map_update(t_data *game, int x, int y);
 void	map_check(t_data *game);
 void	map_create(t_data *game);
-
 void	map_free(t_data *game);
+void	piece_and_size_check(t_data *game);
+
+/* console (terminal) */
 void	console_update(t_data *game);
 void	console_message_quit(void);
 void	console_message_exit_open(void);
@@ -83,8 +92,9 @@ void	console_message_header(t_data *game);
 void	console_message_key_gold(void);
 void	console_message_player_touch_guard(void);
 
-void	piece_and_size_check(t_data *game);
-
+/* texture (images) handling */
+void	textures_check(t_data *game);
+void	textures_free(t_data *game);
 void	textures_load(t_data *game);
 void	textures_load_floor(t_data *game);
 void	textures_load_wall(t_data *game);
@@ -93,11 +103,11 @@ void	textures_load_player(t_data *game);
 void	textures_load_enemy(t_data *game);
 void	textures_load_collectible(t_data *game);
 
+/* rendering (drawing) */
 void	render_pieces(t_data *game);
 void	render_pieces_by_type(t_data *game, char piece);
 void	render_single_piece(t_data *game, int x, int y);
 void	render_pieces_by_type(t_data *game, char piece);
-
 void	render_enemy_animation(t_data *game, int x, int y);
 void	render_wall_random(t_data *game, int x, int y, int sum);
 void	render_collectible_animation(t_data *game, int x, int y);
@@ -105,6 +115,7 @@ void	render_player(t_data *game, int x, int y);
 void	render_gameover(t_data *game, int color);
 void	render_moves(t_data *game);
 
+/* get next line  */
 char	*get_next_line(int fd);
 
 #endif
