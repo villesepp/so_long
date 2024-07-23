@@ -6,7 +6,7 @@
 /*   By: vseppane <vseppane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 17:25:33 by vseppane          #+#    #+#             */
-/*   Updated: 2024/07/21 12:43:46 by vseppane         ###   ########.fr       */
+/*   Updated: 2024/07/23 10:58:08 by vseppane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,12 @@ static void	map_file_read_open_check(t_data *game)
 	fd = open(game->map_file, O_RDONLY);
 	if (fd == -1)
 	{
-		game_quit_error(game, -16, 0);
+		game_quit_error(game, -16, 1);
 	}
 	if (read (fd, NULL, 0) < 0)
 	{
 		close(fd);
-		game_quit_error(game, -10, 0);
+		game_quit_error(game, -10, 1);
 	}
 	close(fd);
 }

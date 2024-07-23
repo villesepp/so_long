@@ -101,4 +101,20 @@ faillist:	all
 				./$(NAME) $$map; \
 			done
 
-.PHONY:		all clean fclean re playlist faillist vallist
+#      _     _                _                     _      
+#   __| |___| |__ _  _ __ _  | |_ __ _ _ _ __ _ ___| |_ ___
+#  / _` / -_) '_ \ || / _` | |  _/ _` | '_/ _` / -_)  _(_-<
+#  \__,_\___|_.__/\_,_\__, |  \__\__,_|_| \__, \___|\__/__/
+#                     |___/               |___/            
+
+vplaylist:	all
+			@for map in $(mapsvalid); do \
+				valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $$map; \
+			done
+
+vfaillist:	all
+			@for map in $(mapsinvalid); do \
+				valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $$map; \
+			done
+
+.PHONY:		all clean fclean re playlist vfaillist vplaylist
